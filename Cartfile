@@ -1,2 +1,2 @@
 github "lightsprint09/Sourcing" ~> 2.0
-github "mcudich/HeckelDiff" "master"
+github "mcudich/HeckelDiff" == 0.2.2
