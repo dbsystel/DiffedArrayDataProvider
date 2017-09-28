@@ -12,6 +12,11 @@
 		C656352E1F7B5F6400918BF2 /* DiffedArrayDataProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C65635201F7B5F6300918BF2 /* DiffedArrayDataProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C656353A1F7B610F00918BF2 /* Sourcing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65635381F7B610F00918BF2 /* Sourcing.framework */; };
 		C656353B1F7B610F00918BF2 /* HeckelDiff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65635391F7B610F00918BF2 /* HeckelDiff.framework */; };
+		C656353F1F7B640C00918BF2 /* DiffedArrayDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C656353E1F7B640B00918BF2 /* DiffedArrayDataProvider.swift */; };
+		C6B9FFDA1F7BC4CB0035018E /* DataProviderUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B9FFD91F7BC4CB0035018E /* DataProviderUpdates.swift */; };
+		C6B9FFDB1F7BCB980035018E /* HeckelDiff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65635391F7B610F00918BF2 /* HeckelDiff.framework */; };
+		C6B9FFDC1F7BCB980035018E /* Sourcing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65635381F7B610F00918BF2 /* Sourcing.framework */; };
+		C6B9FFE01F7CCAC90035018E /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B9FFDF1F7CCAC90035018E /* Person.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +38,9 @@
 		C656352D1F7B5F6400918BF2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C65635381F7B610F00918BF2 /* Sourcing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sourcing.framework; path = Carthage/Build/iOS/Sourcing.framework; sourceTree = "<group>"; };
 		C65635391F7B610F00918BF2 /* HeckelDiff.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HeckelDiff.framework; path = Carthage/Build/iOS/HeckelDiff.framework; sourceTree = "<group>"; };
+		C656353E1F7B640B00918BF2 /* DiffedArrayDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffedArrayDataProvider.swift; sourceTree = "<group>"; };
+		C6B9FFD91F7BC4CB0035018E /* DataProviderUpdates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderUpdates.swift; sourceTree = "<group>"; };
+		C6B9FFDF1F7CCAC90035018E /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +58,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C65635271F7B5F6400918BF2 /* DiffedArrayDataProvider.framework in Frameworks */,
+				C6B9FFDB1F7BCB980035018E /* HeckelDiff.framework in Frameworks */,
+				C6B9FFDC1F7BCB980035018E /* Sourcing.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,8 +88,10 @@
 		C656351F1F7B5F6300918BF2 /* DiffedArrayDataProvider */ = {
 			isa = PBXGroup;
 			children = (
+				C656353E1F7B640B00918BF2 /* DiffedArrayDataProvider.swift */,
 				C65635201F7B5F6300918BF2 /* DiffedArrayDataProvider.h */,
 				C65635211F7B5F6300918BF2 /* Info.plist */,
+				C6B9FFD91F7BC4CB0035018E /* DataProviderUpdates.swift */,
 			);
 			path = DiffedArrayDataProvider;
 			sourceTree = "<group>";
@@ -89,6 +101,7 @@
 			children = (
 				C656352B1F7B5F6400918BF2 /* DiffedArrayDataProviderTests.swift */,
 				C656352D1F7B5F6400918BF2 /* Info.plist */,
+				C6B9FFE11F7CCADB0035018E /* Helper */,
 			);
 			path = DiffedArrayDataProviderTests;
 			sourceTree = "<group>";
@@ -100,6 +113,14 @@
 				C65635381F7B610F00918BF2 /* Sourcing.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C6B9FFE11F7CCADB0035018E /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				C6B9FFDF1F7CCAC90035018E /* Person.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,6 +162,7 @@
 				C65635221F7B5F6400918BF2 /* Sources */,
 				C65635231F7B5F6400918BF2 /* Frameworks */,
 				C65635241F7B5F6400918BF2 /* Resources */,
+				C6B9FFDE1F7BCBB60035018E /* 📦 Carthage Copy */,
 			);
 			buildRules = (
 			);
@@ -164,6 +186,7 @@
 				TargetAttributes = {
 					C656351C1F7B5F6300918BF2 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Manual;
 					};
 					C65635251F7B5F6400918BF2 = {
@@ -207,11 +230,32 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C6B9FFDE1F7BCBB60035018E /* 📦 Carthage Copy */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Sourcing.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/HeckelDiff.framework",
+			);
+			name = "📦 Carthage Copy";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C65635181F7B5F6300918BF2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C656353F1F7B640C00918BF2 /* DiffedArrayDataProvider.swift in Sources */,
+				C6B9FFDA1F7BC4CB0035018E /* DataProviderUpdates.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6B9FFE01F7CCAC90035018E /* Person.swift in Sources */,
 				C656352C1F7B5F6400918BF2 /* DiffedArrayDataProviderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +396,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
@@ -369,6 +415,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -378,6 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
@@ -404,7 +452,12 @@
 		C65635351F7B5F6400918BF2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = DiffedArrayDataProviderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dbsystel.DiffedArrayDataProviderTests;
@@ -417,7 +470,12 @@
 		C65635361F7B5F6400918BF2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = DiffedArrayDataProviderTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dbsystel.DiffedArrayDataProviderTests;

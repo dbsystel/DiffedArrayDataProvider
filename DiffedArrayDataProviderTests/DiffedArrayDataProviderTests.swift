@@ -1,36 +1,102 @@
 //
-//  DiffedArrayDataProviderTests.swift
-//  DiffedArrayDataProviderTests
+//  Copyright (C) DB Systel GmbH.
 //
-//  Created by Lukas Schmidt on 27.09.17.
-//  Copyright © 2017 DBSystel. All rights reserved.
+//  Permission is hereby granted, free of charge, to any person obtaining a
+//  copy of this software and associated documentation files (the "Software"),
+//  to deal in the Software without restriction, including without limitation
+//  the rights to use, copy, modify, merge, publish, distribute, sublicense,
+//  and/or sell copies of the Software, and to permit persons to whom the
+//  Software is furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+//  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+//  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+//  DEALINGS IN THE SOFTWARE.
 //
 
 import XCTest
 @testable import DiffedArrayDataProvider
+import Sourcing
 
 class DiffedArrayDataProviderTests: XCTestCase {
     
+    var arrayDataProvider: ArrayDataProvider<Person>!
+    var diffedArrayDataProvider: DiffedArrayDataProvider<Person>!
+    
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        arrayDataProvider = ArrayDataProvider(rows: [Person(id: "1", age: 30), Person(id: "2", age: 32)])
+        diffedArrayDataProvider = DiffedArrayDataProvider(dataProvider: arrayDataProvider)
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testInsertDelete() {
+        //Prepare
+        var captuerdUpdates: [DataProviderUpdate<Person>] = []
+        let wait = expectation(description: "whenDataProviderChanged")
+        var count = 0
+        diffedArrayDataProvider.whenDataProviderChanged = { updates in
+            captuerdUpdates += (updates ?? [])
+            count += 1
+            if count == 2 {
+                wait.fulfill()
+            }
         }
+        
+        //When
+        arrayDataProvider.reconfigure(with:  [Person(id: "1", age: 30), Person(id: "3", age: 32)])
+        
+        //Then
+        waitForExpectations(timeout: 1, handler: nil)
+        XCTAssertEqual(captuerdUpdates.count, 2)
+    }
+    
+    func testUpdate() {
+        //Prepare
+        var captuerdUpdates: [DataProviderUpdate<Person>] = []
+        let wait = expectation(description: "whenDataProviderChanged")
+        var count = 0
+        diffedArrayDataProvider.whenDataProviderChanged = { updates in
+            captuerdUpdates += (updates ?? [])
+            count += 1
+            if count == 2 {
+                wait.fulfill()
+            }
+        }
+        
+        //When
+        arrayDataProvider.reconfigure(with: [Person(id: "1", age: 30), Person(id: "2", age: 33)])
+        
+        //Then
+        waitForExpectations(timeout: 1, handler: nil)
+        XCTAssertEqual(captuerdUpdates.count, 1)
+    }
+    
+    func testSectionIndexTitles() {
+        //Given
+        let sectionIndexTitles = ["Hello"]
+        
+        //When
+        arrayDataProvider.sectionIndexTitles = sectionIndexTitles
+        
+        //Then
+        XCTAssertEqual(diffedArrayDataProvider.sectionIndexTitles ?? [], sectionIndexTitles)
+    }
+    
+    func testSectionHeader() {
+        //Given
+        let sectionHeader = ["Hello"]
+        
+        //When
+        arrayDataProvider.headerTitles = sectionHeader
+        
+        //Then
+        XCTAssertEqual(diffedArrayDataProvider.headerTitles ?? [], sectionHeader)
     }
     
 }
