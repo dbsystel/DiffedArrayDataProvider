@@ -22,9 +22,9 @@
 
 import Sourcing
 
-struct DataProviderUpdates<Element> {
-    let insertions: [DataProviderUpdate<Element>]
-    let deletions: [DataProviderUpdate<Element>]
-    let moves : [DataProviderUpdate<Element>]
-    let updates: [DataProviderUpdate<Element>]
+struct DataProviderUpdates {
+    let insertions: [DataProviderChange.Change]
+    let deletions: [DataProviderChange.Change]
+    let moves : [DataProviderChange.Change]
+    let updates: [DataProviderChange.Change]
 }

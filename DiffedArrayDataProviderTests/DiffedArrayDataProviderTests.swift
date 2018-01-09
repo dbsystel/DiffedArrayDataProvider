@@ -37,19 +37,21 @@ class DiffedArrayDataProviderTests: XCTestCase {
     
     func testInsertDelete() {
         //Prepare
-        var captuerdUpdates: [DataProviderUpdate<Person>] = []
+        var captuerdUpdates: [DataProviderChange.Change] = []
         let wait = expectation(description: "whenDataProviderChanged")
         var count = 0
-        diffedArrayDataProvider.whenDataProviderChanged = { updates in
-            captuerdUpdates += (updates ?? [])
-            count += 1
-            if count == 2 {
-                wait.fulfill()
+        _ = diffedArrayDataProvider.observable.addObserver { updates in
+            if case .changes(let updates) = updates {
+                captuerdUpdates += updates
+                count += 1
+                if count == 2 {
+                    wait.fulfill()
+                }
             }
         }
         
         //When
-        arrayDataProvider.reconfigure(with:  [Person(id: "1", age: 30), Person(id: "3", age: 32)])
+        arrayDataProvider.reconfigure(with: [Person(id: "1", age: 30), Person(id: "3", age: 32)])
         
         //Then
         waitForExpectations(timeout: 1, handler: nil)
@@ -58,14 +60,16 @@ class DiffedArrayDataProviderTests: XCTestCase {
     
     func testUpdate() {
         //Prepare
-        var captuerdUpdates: [DataProviderUpdate<Person>] = []
+        var captuerdUpdates: [DataProviderChange.Change] = []
         let wait = expectation(description: "whenDataProviderChanged")
         var count = 0
-        diffedArrayDataProvider.whenDataProviderChanged = { updates in
-            captuerdUpdates += (updates ?? [])
-            count += 1
-            if count == 2 {
-                wait.fulfill()
+        _ = diffedArrayDataProvider.observable.addObserver { updates in
+            if case .changes(let updates) = updates {
+                captuerdUpdates += updates
+                count += 1
+                if count == 2 {
+                    wait.fulfill()
+                }
             }
         }
         
@@ -75,28 +79,6 @@ class DiffedArrayDataProviderTests: XCTestCase {
         //Then
         waitForExpectations(timeout: 1, handler: nil)
         XCTAssertEqual(captuerdUpdates.count, 1)
-    }
-    
-    func testSectionIndexTitles() {
-        //Given
-        let sectionIndexTitles = ["Hello"]
-        
-        //When
-        arrayDataProvider.sectionIndexTitles = sectionIndexTitles
-        
-        //Then
-        XCTAssertEqual(diffedArrayDataProvider.sectionIndexTitles ?? [], sectionIndexTitles)
-    }
-    
-    func testSectionHeader() {
-        //Given
-        let sectionHeader = ["Hello"]
-        
-        //When
-        arrayDataProvider.headerTitles = sectionHeader
-        
-        //Then
-        XCTAssertEqual(diffedArrayDataProvider.headerTitles ?? [], sectionHeader)
     }
     
 }
