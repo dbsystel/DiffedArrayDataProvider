@@ -81,4 +81,25 @@ class DiffedArrayDataProviderTests: XCTestCase {
         XCTAssertEqual(captuerdUpdates.count, 1)
     }
     
+    func testUpdateViewUnrelatedChanges() {
+        //Prepare
+        var captuerdUpdates: [DataProviderChange.Change] = []
+        let wait = expectation(description: "whenDataProviderChanged")
+        _ = diffedArrayDataProvider.observable.addObserver { updates in
+            if case .viewUnrelatedChanges(let updates) = updates {
+                captuerdUpdates = updates
+                wait.fulfill()
+            } else {
+                XCTFail()
+            }
+        }
+
+        //When
+        arrayDataProvider.reconfigure(with: [Person(id: "1", age: 30), Person(id: "2", age: 33)], change: .viewUnrelatedChanges([]))
+
+        //Then
+        waitForExpectations(timeout: 1, handler: nil)
+        XCTAssertEqual(captuerdUpdates.count, 0)
+    }
+
 }

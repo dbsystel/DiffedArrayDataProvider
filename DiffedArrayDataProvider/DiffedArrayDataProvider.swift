@@ -47,18 +47,18 @@ public final class DiffedArrayDataProvider<Content>: ArrayDataProviding where Co
         defer {
              previousContent = content
         }
-        guard let previousContent = previousContent.first, let actualContent = backingDataProvider.content.first else {
-            DispatchQueue.main.async {
+        if case .unknown = change {
+            guard let previousContent = previousContent.first, let actualContent = backingDataProvider.content.first else {
                 self.defaultObserver.send(updates: change)
+                return
             }
-            return
-        }
-        let update = ListUpdate(diff(previousContent, actualContent), 0)
-        let updates = dataProviderUpdates(for: update)
-        DispatchQueue.main.async {
+            let update = ListUpdate(diff(previousContent, actualContent), 0)
+            let updates = dataProviderUpdates(for: update)
             let changes = updates.deletions + updates.insertions + updates.moves
-            self.defaultObserver.send(updates: .changes(changes))
-            self.defaultObserver.send(updates: .changes(updates.updates))
+            defaultObserver.send(updates: .changes(changes))
+            defaultObserver.send(updates: .changes(updates.updates))
+        } else {
+            defaultObserver.send(updates: change)
         }
     }
     
