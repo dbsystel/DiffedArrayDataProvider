@@ -25,16 +25,18 @@ import Sourcing
 import HeckelDiff
 
 /// A wrapper around any type which implements `ArrayDataProviding`. When the underlying array of the type changes `DiffedArrayDataProvider` calculated a diff to get animated insertions, updates, moves and deletes. The element of the underlying DataProvider must implement `Hashable`.
-public final class DiffedArrayDataProvider<Content>: ArrayDataProviding where Content: Hashable {
+public final class DiffedArrayDataProvider<Content>: CollectionDataProvider where Content: Hashable {
     
     public typealias Element = Content
     
-    private let backingDataProvider: AnyArrayDataProvider<Element>
+    private let backingDataProvider: AnyCollectionDataProvider<Element>
     
     private var previousContent: [[Element]]
     
     public var content: [[Element]] {
-        return backingDataProvider.content
+        let content = backingDataProvider.content
+        let innerColections = content.map { Array($0) }
+        return Array(innerColections)
     }
     
     public var observable: DataProviderObservable {
@@ -52,7 +54,7 @@ public final class DiffedArrayDataProvider<Content>: ArrayDataProviding where Co
                 self.defaultObserver.send(updates: change)
                 return
             }
-            let update = ListUpdate(diff(previousContent, actualContent), 0)
+            let update = ListUpdate(diff(previousContent, Array(actualContent)), 0)
             let updates = dataProviderUpdates(for: update)
             let changes = updates.deletions + updates.insertions + updates.moves
             defaultObserver.send(updates: .changes(changes))
@@ -73,11 +75,11 @@ public final class DiffedArrayDataProvider<Content>: ArrayDataProviding where Co
     
     private var observer: NSObjectProtocol!
     
-    /// Wraps a `ArrayDataProviding` to calculate a diff when the dataprovider changes,
+    /// Wraps a `CollectionDataProvider` to calculate a diff when the dataprovider changes,
     ///
     /// - Parameter dataProvider: the dataprovider to wrap
-    public init<DataProvider: ArrayDataProviding>(dataProvider: DataProvider) where DataProvider.Element == Element {
-        self.backingDataProvider = AnyArrayDataProvider(dataProvider)
+    public init<DataProvider: CollectionDataProvider>(dataProvider: DataProvider) where DataProvider.Container == [[Element]] {
+        self.backingDataProvider = AnyCollectionDataProvider(dataProvider)
         self.previousContent = dataProvider.content
         observer = dataProvider.observable.addObserver(observer: { [weak self] update in
             self?.executeWhenDataProviderChanged(change: update)
