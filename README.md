@@ -1,6 +1,6 @@
 # DiffedArrayDataProvider
-A composable wrapper arround `ArrayDataProviding`defined in [Sourcing](https://github.com/lightsprint09/Sourcing) which calculates a diff when its contents change.
-The diff is then used to drive animations inside a Table/CollectioView
+A composable wrapper arround `ArrayDataProvider`defined in [Sourcing](https://github.com/lightsprint09/Sourcing) which calculates a diff when its content changes.
+The diff is then used to drive animations inside a Table/CollectioView.
 
 ### Example
 
