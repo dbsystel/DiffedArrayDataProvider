@@ -37,69 +37,60 @@ class DiffedArrayDataProviderTests: XCTestCase {
     
     func testInsertDelete() {
         //Prepare
-        var captuerdUpdates: [DataProviderChange.Change] = []
-        let wait = expectation(description: "whenDataProviderChanged")
-        var count = 0
-        _ = diffedArrayDataProvider.observable.addObserver { updates in
-            if case .changes(let updates) = updates {
-                captuerdUpdates += updates
-                count += 1
-                if count == 2 {
-                    wait.fulfill()
-                }
-            }
+        var captuerdUpdates: [DataProviderChange] = []
+        _ = diffedArrayDataProvider.observable.addObserver { change in
+            captuerdUpdates.append(change)
         }
         
         //When
         arrayDataProvider.reconfigure(with: [Person(id: "1", age: 30), Person(id: "3", age: 32)])
         
         //Then
-        waitForExpectations(timeout: 1, handler: nil)
-        XCTAssertEqual(captuerdUpdates.count, 2)
+        XCTAssertEqual(captuerdUpdates, [.changes([.delete(IndexPath(row: 1, section: 0)),
+                                                   .insert(IndexPath(row: 1, section: 0))])])
     }
     
     func testUpdate() {
         //Prepare
-        var captuerdUpdates: [DataProviderChange.Change] = []
-        let wait = expectation(description: "whenDataProviderChanged")
-        var count = 0
-        _ = diffedArrayDataProvider.observable.addObserver { updates in
-            if case .changes(let updates) = updates {
-                captuerdUpdates += updates
-                count += 1
-                if count == 2 {
-                    wait.fulfill()
-                }
-            }
+        var captuerdUpdates: [DataProviderChange] = []
+        _ = diffedArrayDataProvider.observable.addObserver { change in
+            captuerdUpdates.append(change)
         }
         
         //When
         arrayDataProvider.reconfigure(with: [Person(id: "1", age: 30), Person(id: "2", age: 33)])
         
         //Then
-        waitForExpectations(timeout: 1, handler: nil)
-        XCTAssertEqual(captuerdUpdates.count, 1)
+        XCTAssertEqual(captuerdUpdates, [.changes([.update(IndexPath(row: 1, section: 0))])])
+    }
+    
+    func testMove() {
+        //Prepare
+        var captuerdUpdates: [DataProviderChange] = []
+        _ = diffedArrayDataProvider.observable.addObserver { change in
+            captuerdUpdates.append(change)
+        }
+        
+        //When
+        arrayDataProvider.reconfigure(with: [Person(id: "2", age: 32), Person(id: "1", age: 30)])
+        
+        //Then
+        XCTAssertEqual(captuerdUpdates, [.changes([.move(IndexPath(row: 1, section: 0), IndexPath(row: 0, section: 0)),
+                                                   .move(IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 0))])])
     }
     
     func testUpdateViewUnrelatedChanges() {
         //Prepare
-        var captuerdUpdates: [DataProviderChange.Change] = []
-        let wait = expectation(description: "whenDataProviderChanged")
-        _ = diffedArrayDataProvider.observable.addObserver { updates in
-            if case .viewUnrelatedChanges(let updates) = updates {
-                captuerdUpdates = updates
-                wait.fulfill()
-            } else {
-                XCTFail()
-            }
+        var captuerdUpdates: [DataProviderChange] = []
+        _ = diffedArrayDataProvider.observable.addObserver { change in
+            captuerdUpdates.append(change)
         }
 
         //When
         arrayDataProvider.reconfigure(with: [Person(id: "1", age: 30), Person(id: "2", age: 33)], change: .viewUnrelatedChanges([]))
 
         //Then
-        waitForExpectations(timeout: 1, handler: nil)
-        XCTAssertEqual(captuerdUpdates.count, 0)
+        XCTAssertEqual(captuerdUpdates, [.viewUnrelatedChanges([])])
     }
 
 }

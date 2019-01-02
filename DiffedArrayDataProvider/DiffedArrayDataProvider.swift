@@ -57,8 +57,14 @@ public final class DiffedArrayDataProvider<Content>: CollectionDataProvider wher
             let update = ListUpdate(diff(previousContent, Array(actualContent)), 0)
             let updates = dataProviderUpdates(for: update)
             let changes = updates.deletions + updates.insertions + updates.moves
-            defaultObserver.send(updates: .changes(changes))
-            defaultObserver.send(updates: .changes(updates.updates))
+            if !changes.isEmpty {
+                defaultObserver.send(updates: .changes(changes))
+            }
+            
+            if !updates.updates.isEmpty {
+                defaultObserver.send(updates: .changes(updates.updates))
+            }
+            
         } else {
             defaultObserver.send(updates: change)
         }
