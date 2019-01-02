@@ -22,7 +22,6 @@
 
 import Foundation
 import Sourcing
-import HeckelDiff
 
 /// A wrapper around any type which implements `ArrayDataProviding`. When the underlying array of the type changes `DiffedArrayDataProvider` calculated a diff to get animated insertions, updates, moves and deletes. The element of the underlying DataProvider must implement `Hashable`.
 public final class DiffedArrayDataProvider<Content>: CollectionDataProvider where Content: Hashable {

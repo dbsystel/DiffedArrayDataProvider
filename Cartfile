@@ -1,2 +1,1 @@
 github "lightsprint09/Sourcing" ~> 3.0
-github "mcudich/HeckelDiff" == 0.2.4

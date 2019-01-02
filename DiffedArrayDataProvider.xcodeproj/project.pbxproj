@@ -11,10 +11,9 @@
 		C656352C1F7B5F6400918BF2 /* DiffedArrayDataProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C656352B1F7B5F6400918BF2 /* DiffedArrayDataProviderTests.swift */; };
 		C656352E1F7B5F6400918BF2 /* DiffedArrayDataProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C65635201F7B5F6300918BF2 /* DiffedArrayDataProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C656353A1F7B610F00918BF2 /* Sourcing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65635381F7B610F00918BF2 /* Sourcing.framework */; };
-		C656353B1F7B610F00918BF2 /* HeckelDiff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65635391F7B610F00918BF2 /* HeckelDiff.framework */; };
 		C656353F1F7B640C00918BF2 /* DiffedArrayDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C656353E1F7B640B00918BF2 /* DiffedArrayDataProvider.swift */; };
+		C6576B6B21DCBF0E009AC99C /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6576B6A21DCBF0E009AC99C /* Diff.swift */; };
 		C6B9FFDA1F7BC4CB0035018E /* DataProviderUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B9FFD91F7BC4CB0035018E /* DataProviderUpdates.swift */; };
-		C6B9FFDB1F7BCB980035018E /* HeckelDiff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65635391F7B610F00918BF2 /* HeckelDiff.framework */; };
 		C6B9FFDC1F7BCB980035018E /* Sourcing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65635381F7B610F00918BF2 /* Sourcing.framework */; };
 		C6B9FFE01F7CCAC90035018E /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B9FFDF1F7CCAC90035018E /* Person.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +38,7 @@
 		C65635381F7B610F00918BF2 /* Sourcing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sourcing.framework; path = Carthage/Build/iOS/Sourcing.framework; sourceTree = "<group>"; };
 		C65635391F7B610F00918BF2 /* HeckelDiff.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HeckelDiff.framework; path = Carthage/Build/iOS/HeckelDiff.framework; sourceTree = "<group>"; };
 		C656353E1F7B640B00918BF2 /* DiffedArrayDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffedArrayDataProvider.swift; sourceTree = "<group>"; };
+		C6576B6A21DCBF0E009AC99C /* Diff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
 		C6B9FFD91F7BC4CB0035018E /* DataProviderUpdates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderUpdates.swift; sourceTree = "<group>"; };
 		C6B9FFDF1F7CCAC90035018E /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,7 +49,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C656353A1F7B610F00918BF2 /* Sourcing.framework in Frameworks */,
-				C656353B1F7B610F00918BF2 /* HeckelDiff.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +57,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C65635271F7B5F6400918BF2 /* DiffedArrayDataProvider.framework in Frameworks */,
-				C6B9FFDB1F7BCB980035018E /* HeckelDiff.framework in Frameworks */,
 				C6B9FFDC1F7BCB980035018E /* Sourcing.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -89,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				C656353E1F7B640B00918BF2 /* DiffedArrayDataProvider.swift */,
+				C6576B6A21DCBF0E009AC99C /* Diff.swift */,
 				C65635201F7B5F6300918BF2 /* DiffedArrayDataProvider.h */,
 				C65635211F7B5F6300918BF2 /* Info.plist */,
 				C6B9FFD91F7BC4CB0035018E /* DataProviderUpdates.swift */,
@@ -239,7 +238,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Sourcing.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/HeckelDiff.framework",
 			);
 			name = "📦 Carthage Copy";
 			outputPaths = (
@@ -255,6 +253,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6576B6B21DCBF0E009AC99C /* Diff.swift in Sources */,
 				C656353F1F7B640C00918BF2 /* DiffedArrayDataProvider.swift in Sources */,
 				C6B9FFDA1F7BC4CB0035018E /* DataProviderUpdates.swift in Sources */,
 			);
