@@ -82,7 +82,7 @@ public final class DiffedArrayDataProvider<Content>: CollectionDataProvider wher
     
     private var observer: NSObjectProtocol!
     
-    /// Wraps a `CollectionDataProvider` to calculate a diff when the dataprovider changes,
+    /// Wraps a `CollectionDataProvider` to calculate a diff when the data provider changes.
     ///
     /// - Parameter dataProvider: the dataprovider to wrap
     public init<DataProvider: CollectionDataProvider>(dataProvider: DataProvider) where DataProvider.Container == [[Element]] {
