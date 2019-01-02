@@ -31,72 +31,66 @@ class DiffedArrayDataProviderTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        arrayDataProvider = ArrayDataProvider(rows: [Person(id: "1", age: 30), Person(id: "2", age: 32)])
+        arrayDataProvider = ArrayDataProvider(rows: [Person(id: "1", ageOfPerson: 30), Person(id: "2", ageOfPerson: 32)])
         diffedArrayDataProvider = DiffedArrayDataProvider(dataProvider: arrayDataProvider)
     }
     
     func testInsertDelete() {
         //Prepare
-        var captuerdUpdates: [DataProviderUpdate<Person>] = []
-        let wait = expectation(description: "whenDataProviderChanged")
-        var count = 0
-        diffedArrayDataProvider.whenDataProviderChanged = { updates in
-            captuerdUpdates += (updates ?? [])
-            count += 1
-            if count == 2 {
-                wait.fulfill()
-            }
+        var captuerdUpdates: [DataProviderChange] = []
+        _ = diffedArrayDataProvider.observable.addObserver { change in
+            captuerdUpdates.append(change)
         }
         
         //When
-        arrayDataProvider.reconfigure(with:  [Person(id: "1", age: 30), Person(id: "3", age: 32)])
+        arrayDataProvider.reconfigure(with: [Person(id: "1", ageOfPerson: 30), Person(id: "3", ageOfPerson: 32)])
         
         //Then
-        waitForExpectations(timeout: 1, handler: nil)
-        XCTAssertEqual(captuerdUpdates.count, 2)
+        XCTAssertEqual(captuerdUpdates, [.changes([.delete(IndexPath(row: 1, section: 0)),
+                                                   .insert(IndexPath(row: 1, section: 0))])])
     }
     
     func testUpdate() {
         //Prepare
-        var captuerdUpdates: [DataProviderUpdate<Person>] = []
-        let wait = expectation(description: "whenDataProviderChanged")
-        var count = 0
-        diffedArrayDataProvider.whenDataProviderChanged = { updates in
-            captuerdUpdates += (updates ?? [])
-            count += 1
-            if count == 2 {
-                wait.fulfill()
-            }
+        var captuerdUpdates: [DataProviderChange] = []
+        _ = diffedArrayDataProvider.observable.addObserver { change in
+            captuerdUpdates.append(change)
         }
         
         //When
-        arrayDataProvider.reconfigure(with: [Person(id: "1", age: 30), Person(id: "2", age: 33)])
+        arrayDataProvider.reconfigure(with: [Person(id: "1", ageOfPerson: 30), Person(id: "2", ageOfPerson: 33)])
         
         //Then
-        waitForExpectations(timeout: 1, handler: nil)
-        XCTAssertEqual(captuerdUpdates.count, 1)
+        XCTAssertEqual(captuerdUpdates, [.changes([.update(IndexPath(row: 1, section: 0))])])
     }
     
-    func testSectionIndexTitles() {
-        //Given
-        let sectionIndexTitles = ["Hello"]
+    func testMove() {
+        //Prepare
+        var captuerdUpdates: [DataProviderChange] = []
+        _ = diffedArrayDataProvider.observable.addObserver { change in
+            captuerdUpdates.append(change)
+        }
         
         //When
-        arrayDataProvider.sectionIndexTitles = sectionIndexTitles
+        arrayDataProvider.reconfigure(with: [Person(id: "2", ageOfPerson: 32), Person(id: "1", ageOfPerson: 30)])
         
         //Then
-        XCTAssertEqual(diffedArrayDataProvider.sectionIndexTitles ?? [], sectionIndexTitles)
+        XCTAssertEqual(captuerdUpdates, [.changes([.move(IndexPath(row: 1, section: 0), IndexPath(row: 0, section: 0)),
+                                                   .move(IndexPath(row: 0, section: 0), IndexPath(row: 1, section: 0))])])
     }
     
-    func testSectionHeader() {
-        //Given
-        let sectionHeader = ["Hello"]
-        
+    func testUpdateViewUnrelatedChanges() {
+        //Prepare
+        var captuerdUpdates: [DataProviderChange] = []
+        _ = diffedArrayDataProvider.observable.addObserver { change in
+            captuerdUpdates.append(change)
+        }
+
         //When
-        arrayDataProvider.headerTitles = sectionHeader
-        
+        arrayDataProvider.reconfigure(with: [Person(id: "1", ageOfPerson: 30), Person(id: "2", ageOfPerson: 33)], change: .viewUnrelatedChanges([]))
+
         //Then
-        XCTAssertEqual(diffedArrayDataProvider.headerTitles ?? [], sectionHeader)
+        XCTAssertEqual(captuerdUpdates, [.viewUnrelatedChanges([])])
     }
-    
+
 }

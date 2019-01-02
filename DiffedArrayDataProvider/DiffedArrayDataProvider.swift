@@ -22,71 +22,78 @@
 
 import Foundation
 import Sourcing
-import HeckelDiff
 
-/// A wrapper around any type which implements `ArrayDataProviding`. When the underlying array of the type changes `DiffedArrayDataProvider` calculated a diff to get animated insertions, updates, moves and deletes. The element of the underlying DataProvider must implement `Hashable`.
-public final class DiffedArrayDataProvider<Element>: ArrayDataProviding where Element: Hashable {
-    private let backingDataProvider: AnyArrayDataProvider<Element>
+/// A wrapper around any type which implements `ArrayDataProviding`.
+/// When the underlying array of the type changes `DiffedArrayDataProvider` calculated a diff to get animated insertions, updates, moves and deletes.
+/// The element of the underlying DataProvider must implement `Hashable`.
+public final class DiffedArrayDataProvider<Content>: CollectionDataProvider where Content: Hashable {
     
-    private var previousContents: [[Element]]
+    public typealias Element = Content
     
-    public var contents: [[Element]] {
-        return backingDataProvider.contents
+    private let backingDataProvider: AnyCollectionDataProvider<Element>
+    
+    private var previousContent: [[Element]]
+    
+    public var content: [[Element]] {
+        let content = backingDataProvider.content
+        let innerColections = content.map { Array($0) }
+        return Array(innerColections)
     }
     
-    /**
-     Closure which gets called, when data inside the provider changes and those changes should be propagated to the datasource.
-     
-     - warning: Only set this when you are updating the datasource by your own.
-     */
-    public var whenDataProviderChanged: ProcessUpdatesCallback<Element>? {
-        didSet {
-            backingDataProvider.whenDataProviderChanged = { [weak self] updates in
-                self?.executeWhenDataProviderChanged(updates: updates)
-            }
-        }
+    public var observable: DataProviderObservable {
+        return defaultObserver
     }
     
-    private func executeWhenDataProviderChanged(updates: [DataProviderUpdate<Element>]?) {
+    private let defaultObserver = DefaultDataProviderObservable()
+    
+    private func executeWhenDataProviderChanged(change: DataProviderChange) {
         defer {
-             previousContents = contents
+             previousContent = content
         }
-        guard let previousContent = previousContents.first, let actualContent = backingDataProvider.contents.first else {
-            DispatchQueue.main.async {
-                self.whenDataProviderChanged?(updates)
+        if case .unknown = change {
+            guard let previousContent = previousContent.first, let actualContent = backingDataProvider.content.first else {
+                self.defaultObserver.send(updates: change)
+                return
             }
-            return
-        }
-        let update = ListUpdate(diff(previousContent, actualContent), 0)
-        let updates = dataProviderUpdates(for: update)
-        DispatchQueue.main.async {
-            self.whenDataProviderChanged?(updates.deletions + updates.insertions + updates.moves)
-            self.whenDataProviderChanged?(updates.updates)
+            let update = ListUpdate(diff(previousContent, Array(actualContent)), 0)
+            let updates = dataProviderUpdates(for: update)
+            let changes = updates.deletions + updates.insertions + updates.moves
+            if !changes.isEmpty {
+                defaultObserver.send(updates: .changes(changes))
+            }
+            
+            if !updates.updates.isEmpty {
+                defaultObserver.send(updates: .changes(updates.updates))
+            }
+            
+        } else {
+            defaultObserver.send(updates: change)
         }
     }
     
-    private func dataProviderUpdates(for update: ListUpdate) -> DataProviderUpdates<Element> {
-        let updates = update.updates.map { DataProviderUpdate<Element>.update($0, object(at: $0)) }
-        let deletions = update.deletions.map { DataProviderUpdate<Element>.delete($0) }
-        let insertions = update.insertions.map { DataProviderUpdate<Element>.insert($0) }
-        let moves = update.moves.map { DataProviderUpdate<Element>.move($0.from, $0.to) }
+    private func dataProviderUpdates(for update: ListUpdate) -> DataProviderUpdates {
+        let updates = update.updates.map { DataProviderChange.Change.update($0) }
+        let deletions = update.deletions.map { DataProviderChange.Change.delete($0) }
+        let insertions = update.insertions.map { DataProviderChange.Change.insert($0) }
+        let moves = update.moves.map { DataProviderChange.Change.move($0.from, $0.to) }
         
         return DataProviderUpdates(insertions: insertions, deletions: deletions, moves: moves, updates: updates)
     }
     
-    public var sectionIndexTitles: [String]? {
-        return backingDataProvider.sectionIndexTitles
-    }
+    private var observer: NSObjectProtocol!
     
-    public var headerTitles: [String]? {
-        return backingDataProvider.headerTitles
-    }
-    
-    /// Wraps a `ArrayDataProviding` to calculate a diff when the dataprovider changes,
+    /// Wraps a `CollectionDataProvider` to calculate a diff when the dataprovider changes,
     ///
     /// - Parameter dataProvider: the dataprovider to wrap
-    public init<DataProvider: ArrayDataProviding>(dataProvider: DataProvider) where DataProvider.Element == Element {
-        self.backingDataProvider = AnyArrayDataProvider(dataProvider)
-        self.previousContents = dataProvider.contents
+    public init<DataProvider: CollectionDataProvider>(dataProvider: DataProvider) where DataProvider.Container == [[Element]] {
+        self.backingDataProvider = AnyCollectionDataProvider(dataProvider)
+        self.previousContent = dataProvider.content
+        observer = dataProvider.observable.addObserver(observer: { [weak self] update in
+            self?.executeWhenDataProviderChanged(change: update)
+        })
+    }
+    
+    deinit {
+        defaultObserver.removeObserver(observer: observer)
     }
 }

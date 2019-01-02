@@ -23,13 +23,13 @@
 struct Person: Hashable {
     
     let id: String
-    let age: Int
+    let ageOfPerson: Int
     
-    var hashValue: Int {
-        return id.hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
     
-    static func ==(lhs: Person, rhs: Person) -> Bool{
-        return lhs.id == rhs.id && lhs.age == rhs.age
+    static func == (left: Person, right: Person) -> Bool {
+        return left.id == right.id && left.ageOfPerson == right.ageOfPerson
     }
 }

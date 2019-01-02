@@ -11,10 +11,9 @@
 		C656352C1F7B5F6400918BF2 /* DiffedArrayDataProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C656352B1F7B5F6400918BF2 /* DiffedArrayDataProviderTests.swift */; };
 		C656352E1F7B5F6400918BF2 /* DiffedArrayDataProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C65635201F7B5F6300918BF2 /* DiffedArrayDataProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C656353A1F7B610F00918BF2 /* Sourcing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65635381F7B610F00918BF2 /* Sourcing.framework */; };
-		C656353B1F7B610F00918BF2 /* HeckelDiff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65635391F7B610F00918BF2 /* HeckelDiff.framework */; };
 		C656353F1F7B640C00918BF2 /* DiffedArrayDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C656353E1F7B640B00918BF2 /* DiffedArrayDataProvider.swift */; };
+		C6576B6B21DCBF0E009AC99C /* Diff.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6576B6A21DCBF0E009AC99C /* Diff.swift */; };
 		C6B9FFDA1F7BC4CB0035018E /* DataProviderUpdates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B9FFD91F7BC4CB0035018E /* DataProviderUpdates.swift */; };
-		C6B9FFDB1F7BCB980035018E /* HeckelDiff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65635391F7B610F00918BF2 /* HeckelDiff.framework */; };
 		C6B9FFDC1F7BCB980035018E /* Sourcing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C65635381F7B610F00918BF2 /* Sourcing.framework */; };
 		C6B9FFE01F7CCAC90035018E /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6B9FFDF1F7CCAC90035018E /* Person.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +38,7 @@
 		C65635381F7B610F00918BF2 /* Sourcing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sourcing.framework; path = Carthage/Build/iOS/Sourcing.framework; sourceTree = "<group>"; };
 		C65635391F7B610F00918BF2 /* HeckelDiff.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HeckelDiff.framework; path = Carthage/Build/iOS/HeckelDiff.framework; sourceTree = "<group>"; };
 		C656353E1F7B640B00918BF2 /* DiffedArrayDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffedArrayDataProvider.swift; sourceTree = "<group>"; };
+		C6576B6A21DCBF0E009AC99C /* Diff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diff.swift; sourceTree = "<group>"; };
 		C6B9FFD91F7BC4CB0035018E /* DataProviderUpdates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderUpdates.swift; sourceTree = "<group>"; };
 		C6B9FFDF1F7CCAC90035018E /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,7 +49,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C656353A1F7B610F00918BF2 /* Sourcing.framework in Frameworks */,
-				C656353B1F7B610F00918BF2 /* HeckelDiff.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +57,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C65635271F7B5F6400918BF2 /* DiffedArrayDataProvider.framework in Frameworks */,
-				C6B9FFDB1F7BCB980035018E /* HeckelDiff.framework in Frameworks */,
 				C6B9FFDC1F7BCB980035018E /* Sourcing.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -89,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				C656353E1F7B640B00918BF2 /* DiffedArrayDataProvider.swift */,
+				C6576B6A21DCBF0E009AC99C /* Diff.swift */,
 				C65635201F7B5F6300918BF2 /* DiffedArrayDataProvider.h */,
 				C65635211F7B5F6300918BF2 /* Info.plist */,
 				C6B9FFD91F7BC4CB0035018E /* DataProviderUpdates.swift */,
@@ -145,6 +144,7 @@
 				C65635191F7B5F6300918BF2 /* Frameworks */,
 				C656351A1F7B5F6300918BF2 /* Headers */,
 				C656351B1F7B5F6300918BF2 /* Resources */,
+				C6576B6C21DCC3B2009AC99C /* 🚧 SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -181,16 +181,17 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = DBSystel;
 				TargetAttributes = {
 					C656351C1F7B5F6300918BF2 = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Manual;
 					};
 					C65635251F7B5F6400918BF2 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -231,6 +232,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		C6576B6C21DCC3B2009AC99C /* 🚧 SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "🚧 SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \\\"${CONFIGURATION}\\\" != \\\"Release\\\" ];\nthen if which swiftlint >/dev/null;\nthen\nswiftlint\nelse\necho \\\"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\\\"\nfi\nfi\n";
+		};
 		C6B9FFDE1F7BCBB60035018E /* 📦 Carthage Copy */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -238,14 +257,13 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Sourcing.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/HeckelDiff.framework",
 			);
 			name = "📦 Carthage Copy";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -254,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6576B6B21DCBF0E009AC99C /* Diff.swift in Sources */,
 				C656353F1F7B640C00918BF2 /* DiffedArrayDataProvider.swift in Sources */,
 				C6B9FFDA1F7BC4CB0035018E /* DataProviderUpdates.swift in Sources */,
 			);
@@ -293,6 +312,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -300,6 +320,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -353,6 +374,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -360,6 +382,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -395,7 +418,7 @@
 		C65635321F7B5F6400918BF2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
@@ -416,7 +439,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -424,7 +447,7 @@
 		C65635331F7B5F6400918BF2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Manual;
@@ -444,7 +467,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -462,7 +485,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dbsystel.DiffedArrayDataProviderTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -480,7 +503,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dbsystel.DiffedArrayDataProviderTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
