@@ -25,6 +25,6 @@ import Sourcing
 struct DataProviderUpdates {
     let insertions: [DataProviderChange.Change]
     let deletions: [DataProviderChange.Change]
-    let moves : [DataProviderChange.Change]
+    let moves: [DataProviderChange.Change]
     let updates: [DataProviderChange.Change]
 }
