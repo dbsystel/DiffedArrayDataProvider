@@ -31,7 +31,7 @@ class DiffedArrayDataProviderTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        arrayDataProvider = ArrayDataProvider(rows: [Person(id: "1", age: 30), Person(id: "2", age: 32)])
+        arrayDataProvider = ArrayDataProvider(rows: [Person(id: "1", ageOfPerson: 30), Person(id: "2", ageOfPerson: 32)])
         diffedArrayDataProvider = DiffedArrayDataProvider(dataProvider: arrayDataProvider)
     }
     
@@ -43,7 +43,7 @@ class DiffedArrayDataProviderTests: XCTestCase {
         }
         
         //When
-        arrayDataProvider.reconfigure(with: [Person(id: "1", age: 30), Person(id: "3", age: 32)])
+        arrayDataProvider.reconfigure(with: [Person(id: "1", ageOfPerson: 30), Person(id: "3", ageOfPerson: 32)])
         
         //Then
         XCTAssertEqual(captuerdUpdates, [.changes([.delete(IndexPath(row: 1, section: 0)),
@@ -58,7 +58,7 @@ class DiffedArrayDataProviderTests: XCTestCase {
         }
         
         //When
-        arrayDataProvider.reconfigure(with: [Person(id: "1", age: 30), Person(id: "2", age: 33)])
+        arrayDataProvider.reconfigure(with: [Person(id: "1", ageOfPerson: 30), Person(id: "2", ageOfPerson: 33)])
         
         //Then
         XCTAssertEqual(captuerdUpdates, [.changes([.update(IndexPath(row: 1, section: 0))])])
@@ -72,7 +72,7 @@ class DiffedArrayDataProviderTests: XCTestCase {
         }
         
         //When
-        arrayDataProvider.reconfigure(with: [Person(id: "2", age: 32), Person(id: "1", age: 30)])
+        arrayDataProvider.reconfigure(with: [Person(id: "2", ageOfPerson: 32), Person(id: "1", ageOfPerson: 30)])
         
         //Then
         XCTAssertEqual(captuerdUpdates, [.changes([.move(IndexPath(row: 1, section: 0), IndexPath(row: 0, section: 0)),
@@ -87,7 +87,7 @@ class DiffedArrayDataProviderTests: XCTestCase {
         }
 
         //When
-        arrayDataProvider.reconfigure(with: [Person(id: "1", age: 30), Person(id: "2", age: 33)], change: .viewUnrelatedChanges([]))
+        arrayDataProvider.reconfigure(with: [Person(id: "1", ageOfPerson: 30), Person(id: "2", ageOfPerson: 33)], change: .viewUnrelatedChanges([]))
 
         //Then
         XCTAssertEqual(captuerdUpdates, [.viewUnrelatedChanges([])])
