@@ -1,7 +1,7 @@
-![Build Status](https://travis-ci.com/dbsystel/DiffedArrayDataProvider.svg?branch=master)](https://travis-ci.org/dbsystel/DBNetworkStack-Sourcing)
+![Build Status](https://travis-ci.com/dbsystel/DiffedArrayDataProvider.svg?branch=master)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 # DiffedArrayDataProvider
-A composable wrapper arround `ArrayDataProvider`defined in [Sourcing](https://github.com/lightsprint09/Sourcing) which calculates a diff when its content changes.
+A composable wrapper arround `CollectionDataProvider` defined in [Sourcing](https://github.com/lightsprint09/Sourcing) which calculates a diff when its content changes.
 The diff is then used to drive animations inside a Table/CollectioView.
 
 ## Usage
