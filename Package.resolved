@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Sourcing",
+        "repositoryURL": "https://github.com/lightsprint09/Sourcing",
+        "state": {
+          "branch": "swiftpm",
+          "revision": "3697ea192e97d01a184e6811a2c0804b0887b823",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
