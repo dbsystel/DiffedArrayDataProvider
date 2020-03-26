@@ -86,7 +86,7 @@ public final class DiffedArrayDataProvider<Content>: CollectionDataProvider wher
     ///
     /// - Parameter dataProvider: the dataprovider to wrap
     public init<DataProvider: CollectionDataProvider>(dataProvider: DataProvider) where DataProvider.Container == [[Element]] {
-        self.backingDataProvider = AnyCollectionDataProvider(dataProvider)
+        self.backingDataProvider = AnyCollectionDataProvider(dataProvider: dataProvider)
         self.previousContent = dataProvider.content
         observer = dataProvider.observable.addObserver(observer: { [weak self] update in
             self?.executeWhenDataProviderChanged(change: update)

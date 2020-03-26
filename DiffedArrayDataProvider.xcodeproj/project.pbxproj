@@ -67,8 +67,8 @@
 		C65635131F7B5F6300918BF2 = {
 			isa = PBXGroup;
 			children = (
-				C656351F1F7B5F6300918BF2 /* DiffedArrayDataProvider */,
-				C656352A1F7B5F6400918BF2 /* DiffedArrayDataProviderTests */,
+				C656351F1F7B5F6300918BF2 /* Source */,
+				C656352A1F7B5F6400918BF2 /* Tests */,
 				C656351E1F7B5F6300918BF2 /* Products */,
 				C65635371F7B610F00918BF2 /* Frameworks */,
 			);
@@ -83,7 +83,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C656351F1F7B5F6300918BF2 /* DiffedArrayDataProvider */ = {
+		C656351F1F7B5F6300918BF2 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				C656353E1F7B640B00918BF2 /* DiffedArrayDataProvider.swift */,
@@ -92,17 +92,17 @@
 				C65635211F7B5F6300918BF2 /* Info.plist */,
 				C6B9FFD91F7BC4CB0035018E /* DataProviderUpdates.swift */,
 			);
-			path = DiffedArrayDataProvider;
+			path = Source;
 			sourceTree = "<group>";
 		};
-		C656352A1F7B5F6400918BF2 /* DiffedArrayDataProviderTests */ = {
+		C656352A1F7B5F6400918BF2 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				C656352B1F7B5F6400918BF2 /* DiffedArrayDataProviderTests.swift */,
 				C656352D1F7B5F6400918BF2 /* Info.plist */,
 				C6B9FFE11F7CCADB0035018E /* Helper */,
 			);
-			path = DiffedArrayDataProviderTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		C65635371F7B610F00918BF2 /* Frameworks */ = {
@@ -349,7 +349,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -405,7 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -431,8 +431,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = DiffedArrayDataProvider/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dbsystel.DiffedArrayDataProvider;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -460,8 +461,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = DiffedArrayDataProvider/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dbsystel.DiffedArrayDataProvider;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -481,7 +483,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = DiffedArrayDataProviderTests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dbsystel.DiffedArrayDataProviderTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -499,7 +501,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = DiffedArrayDataProviderTests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dbsystel.DiffedArrayDataProviderTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
