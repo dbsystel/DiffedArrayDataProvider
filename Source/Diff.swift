@@ -7,6 +7,7 @@
 //
 // Copied from https://raw.githubusercontent.com/mcudich/HeckelDiff/master/Source/Diff.swift
 
+// swiftlint:disable identifier_name
 import Foundation
 
 /// Used to represent the operation to perform on the source array. Indices indicate the position at
@@ -22,7 +23,7 @@ enum Operation: Equatable {
     case move(Int, Int)
     case update(Int)
     
-    static func ==(lhs: Operation, rhs: Operation) -> Bool {
+    static func == (lhs: Operation, rhs: Operation) -> Bool {
         switch (lhs, rhs) {
         case let (.insert(l), .insert(r)),
              let (.delete(l), .delete(r)),

@@ -5,9 +5,9 @@
         "package": "Sourcing",
         "repositoryURL": "https://github.com/lightsprint09/Sourcing",
         "state": {
-          "branch": "swiftpm",
-          "revision": "3697ea192e97d01a184e6811a2c0804b0887b823",
-          "version": null
+          "branch": null,
+          "revision": "be872e9a4bfe942c672e51ed94797806c7f9b497",
+          "version": "4.0.0"
         }
       }
     ]

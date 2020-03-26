@@ -15,7 +15,9 @@ let package = Package(
             name: "DiffedArrayDataProvider",
             targets: ["DiffedArrayDataProvider"]),
     ],
-    dependencies: [Package.Dependency.package(url: "https://github.com/lightsprint09/Sourcing", ._branchItem("swiftpm"))],
+    dependencies: [
+        .package(url: "https://github.com/lightsprint09/Sourcing", from: "4.0.0"),
+    ],
     targets: [
         .target(
             name: "DiffedArrayDataProvider",
