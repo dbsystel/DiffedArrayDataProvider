@@ -67,8 +67,8 @@
 		C65635131F7B5F6300918BF2 = {
 			isa = PBXGroup;
 			children = (
-				C656351F1F7B5F6300918BF2 /* DiffedArrayDataProvider */,
-				C656352A1F7B5F6400918BF2 /* DiffedArrayDataProviderTests */,
+				C656351F1F7B5F6300918BF2 /* Source */,
+				C656352A1F7B5F6400918BF2 /* Tests */,
 				C656351E1F7B5F6300918BF2 /* Products */,
 				C65635371F7B610F00918BF2 /* Frameworks */,
 			);
@@ -83,7 +83,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C656351F1F7B5F6300918BF2 /* DiffedArrayDataProvider */ = {
+		C656351F1F7B5F6300918BF2 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				C656353E1F7B640B00918BF2 /* DiffedArrayDataProvider.swift */,
@@ -92,17 +92,17 @@
 				C65635211F7B5F6300918BF2 /* Info.plist */,
 				C6B9FFD91F7BC4CB0035018E /* DataProviderUpdates.swift */,
 			);
-			path = DiffedArrayDataProvider;
+			path = Source;
 			sourceTree = "<group>";
 		};
-		C656352A1F7B5F6400918BF2 /* DiffedArrayDataProviderTests */ = {
+		C656352A1F7B5F6400918BF2 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
 				C656352B1F7B5F6400918BF2 /* DiffedArrayDataProviderTests.swift */,
 				C656352D1F7B5F6400918BF2 /* Info.plist */,
 				C6B9FFE11F7CCADB0035018E /* Helper */,
 			);
-			path = DiffedArrayDataProviderTests;
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		C65635371F7B610F00918BF2 /* Frameworks */ = {
@@ -431,7 +431,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = DiffedArrayDataProvider/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dbsystel.DiffedArrayDataProvider;
@@ -460,7 +460,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = DiffedArrayDataProvider/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dbsystel.DiffedArrayDataProvider;
