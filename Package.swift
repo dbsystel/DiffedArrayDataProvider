@@ -13,10 +13,10 @@ let package = Package(
     products: [
         .library(
             name: "DiffedArrayDataProvider",
-            targets: ["DiffedArrayDataProvider"]),
+            targets: ["DiffedArrayDataProvider"])
     ],
     dependencies: [
-        .package(url: "https://github.com/lightsprint09/Sourcing", from: "4.0.0"),
+        .package(url: "https://github.com/lightsprint09/Sourcing", from: "4.0.0")
     ],
     targets: [
         .target(
@@ -26,7 +26,6 @@ let package = Package(
         .testTarget(
             name: "DiffedArrayDataProviderTests",
             dependencies: ["DiffedArrayDataProvider"],
-            path: "Tests"),
+            path: "Tests")
     ]
 )
-

@@ -233,8 +233,6 @@ func orderedDiff<T: Collection>(_ old: T, _ new: T) -> [Operation] where T.Itera
 //
 // Copied https://raw.githubusercontent.com/mcudich/HeckelDiff/master/Source/ListUpdate.swift
 
-import Foundation
-
 struct ListUpdate {
     public var deletions = [IndexPath]()
     public var insertions = [IndexPath]()

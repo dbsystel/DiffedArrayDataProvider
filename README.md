@@ -16,10 +16,20 @@ let diffedArrayDataProvider = DiffedArrayDataProvider(dataProvider: arrayDataPro
 
 ## Requirements
 - iOS 9.3+
-- Xcode 10.1+
-- Swift 4.2
+- Xcode 11.0+
+- Swift 5.0
 
 ## Installation
+
+### Swift Package Manager
+
+[SPM](https://swift.org/package-manager/) is integrated with the Swift build system to automate the process of downloading, compiling, and linking dependencies.
+
+Specify the following in your `Package.swift`:
+
+```swift
+.package(url: "https://github.com/dbsystel/DiffedArrayDataProvider", from: "2.0.0"),
+```
 
 ### Carthage
 
@@ -28,7 +38,7 @@ let diffedArrayDataProvider = DiffedArrayDataProvider(dataProvider: arrayDataPro
 Specify the following in your `Cartfile`:
 
 ```ogdl
-github "dbsystel/DiffedArrayDataProvider" ~> 1.0
+github "dbsystel/DiffedArrayDataProvider" ~> 2.0
 ```
 ## Contributing
 Feel free to submit a pull request with new features, improvements on tests or documentation and bug fixes. Keep in mind that we welcome code that is well tested and documented.
